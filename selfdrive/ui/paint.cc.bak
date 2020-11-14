@@ -201,14 +201,14 @@ static void ui_draw_track(UIState *s, bool is_mpc, track_vertices_data *pvd) {
     // Draw colored MPC track Kegman's
     if (s->scene.steerOverride) {
       track_bg = nvgLinearGradient(s->vg, s->fb_w, s->fb_h, s->fb_w, s->fb_h*.4,
-        COLOR_BLACK_ALPHA(200), COLOR_BLACK_ALPHA(20)); //nvgRGBA(0, 191, 255, 255), nvgRGBA(0, 95, 128, 50));
+        nvgRGBA(0, 191, 255, 255), nvgRGBA(0, 95, 128, 50));
     } else {
       int torque_scale = (int)fabs(510*(float)s->scene.output_scale);
       int red_lvl = fmin(255, torque_scale);
-      int blue_lvl = fmin(255, 510-torque_scale);
+      int green_lvl = fmin(255, 510-torque_scale);
       track_bg = nvgLinearGradient(s->vg, s->fb_w, s->fb_h, s->fb_w, s->fb_h*.4,
-        nvgRGBA(          red_lvl, 0, blue_lvl,  255),
-        nvgRGBA((int)(0.7*red_lvl), 0, (int)(0.7*blue_lvl), 50));
+        nvgRGBA(          red_lvl,            green_lvl,  0, 255),
+        nvgRGBA((int)(0.5*red_lvl), (int)(0.5*green_lvl), 0, 50));
     }
   } else {
     // Draw white vision track
@@ -272,7 +272,7 @@ static void ui_draw_vision_lane_lines(UIState *s) {
     if(s->sm->updated("modelV2")) {
       update_line_data(s, scene->model.getLaneLines()[ll_idx], 0.025*scene->model.getLaneLineProbs()[ll_idx], pvd_ll + ll_idx, scene->max_distance);
     }
-    NVGcolor color = nvgRGBAf(0, 0, 1.0, scene->lane_line_probs[ll_idx]);
+    NVGcolor color = nvgRGBAf(1.0, 1.0, 1.0, scene->lane_line_probs[ll_idx]);
     ui_draw_line(s, (pvd_ll + ll_idx)->v, (pvd_ll + ll_idx)->cnt, &color, nullptr);
   }
   
@@ -463,11 +463,9 @@ static void ui_draw_debug(UIState *s)
     } else {
       ui_print(s, ui_viz_rx_center, ui_viz_ry+700, "　%.4f　", abs(scene.curvature));
     }
-    ui_print(s, ui_viz_rx_center, ui_viz_ry+750, "←좌측간격(%%)→    차선폭(m)    ←우측간격(%%)→");
-    ui_print(s, ui_viz_rx_center, ui_viz_ry+800, "%4.1f                     %4.2f                    %4.1f", 
-                                                    (scene.pathPlan.lPoly/(scene.pathPlan.lPoly+abs(scene.pathPlan.rPoly)))*100, 
-                                                    scene.pathPlan.laneWidth, 
-                                                    (abs(scene.pathPlan.rPoly)/(scene.pathPlan.lPoly+abs(scene.pathPlan.rPoly)))*100);    }
+    ui_print(s, ui_viz_rx_center, ui_viz_ry+750, " 좌측간격(m)    차선폭(m)    우측간격(m)");
+    ui_print(s, ui_viz_rx_center, ui_viz_ry+800, "%.2f                    %.2f                    %.2f", scene.pathPlan.lPoly, scene.pathPlan.laneWidth, abs(scene.pathPlan.rPoly));
+  }
 }
 
 /*
@@ -674,10 +672,10 @@ static void ui_draw_driver_view(UIState *s) {
 
     if (std::abs(face_x) <= 0.35 && std::abs(face_y) <= 0.4) {
       ui_draw_rect(s->vg, fbox_x, fbox_y, 0.6 * box_h / 2, 0.6 * box_h / 2,
-                   nvgRGBAf(1.0, 0.85, 0.72, 0.8 - ((std::abs(face_x) > std::abs(face_y) ? std::abs(face_x) : std::abs(face_y))) * 0.6 / 0.375),
+                   nvgRGBAf(1.0, 1.0, 1.0, 0.8 - ((std::abs(face_x) > std::abs(face_y) ? std::abs(face_x) : std::abs(face_y))) * 0.6 / 0.375),
                    35, 10);
     } else {
-      ui_draw_rect(s->vg, fbox_x, fbox_y, 0.6 * box_h / 2, 0.6 * box_h / 2, nvgRGBAf(1.0, 0.85, 0.72, 0.2), 35, 10);
+      ui_draw_rect(s->vg, fbox_x, fbox_y, 0.6 * box_h / 2, 0.6 * box_h / 2, nvgRGBAf(1.0, 1.0, 1.0, 0.2), 35, 10);
     }
   }
 
