@@ -536,15 +536,15 @@ FEATURES = {
   "use_elect_ems": {CAR.OPTIMA_HEV, CAR.IONIQ_EV_LTD, CAR.KONA_EV, CAR.SONATA_HEV, CAR.NIRO_EV, CAR.CADENZA_HEV,
                     CAR.GRANDEUR_HEV, CAR.NEXO, CAR.NIRO_HEV},
   # send LFA MFA message for new HKG models
-  "send_lfa_mfa": {},
+  "send_lfa_mfa": {CAR.GRANDEUR_HEV, CAR.GRANDEUR},
   "has_scc13": set([]), 
   "has_scc14": set([]), 
   # these cars use the FCA11 message for the AEB and FCW signals, all others use SCC12
   "use_fca": {CAR.SONATA, CAR.ELANTRA, CAR.ELANTRA_GT_I30, CAR.STINGER, CAR.IONIQ, CAR.KONA, CAR.KONA_EV, CAR.FORTE,
-              CAR.PALISADE, CAR.GENESIS_G70},
+              CAR.GRANDEUR_HEV, CAR.GRANDEUR, CAR.PALISADE, CAR.GENESIS_G70},
 
   "use_bsm": {CAR.SONATA, CAR.PALISADE, CAR.GENESIS, CAR.GENESIS_G70, CAR.GENESIS_G80, CAR.GENESIS_G90,
-              CAR.GENESIS_G90_L, CAR.KONA, CAR.OPTIMA_HEV},
+              CAR.GRANDEUR_HEV, CAR.GRANDEUR, CAR.GENESIS_G90_L, CAR.KONA, CAR.OPTIMA_HEV},
 
   "use_blinker_flash": {CAR.SONATA_LF_TURBO},
 }
