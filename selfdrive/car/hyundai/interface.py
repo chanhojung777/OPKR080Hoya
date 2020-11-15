@@ -30,7 +30,7 @@ class CarInterface(CarInterfaceBase):
     ret = CarInterfaceBase.get_std_params(candidate, fingerprint)
 
     ret.carName = "hyundai"
-    ret.safetyModel = car.CarParams.SafetyModel.hyundaiLegacy
+    ret.safetyModel = car.CarParams.SafetyModel.hyundaiCommunity #Legacy
     if candidate in [CAR.GRANDEUR_HEV2020, CAR.GRANDEUR2020, CAR.GRANDEUR_HEV, CAR.GRANDEUR, CAR.SONATA]:
      ret.safetyModel = car.CarParams.SafetyModel.hyundai
 
