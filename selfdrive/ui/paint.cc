@@ -272,7 +272,7 @@ static void ui_draw_vision_lane_lines(UIState *s) {
     if(s->sm->updated("modelV2")) {
       update_line_data(s, scene->model.getLaneLines()[ll_idx], 0.025*scene->model.getLaneLineProbs()[ll_idx], pvd_ll + ll_idx, scene->max_distance);
     }
-    NVGcolor color = nvgRGBAf(0, 0, 1.0, scene->lane_line_probs[ll_idx]);
+    NVGcolor color = nvgRGBAf(0, 1.0, 0, scene->lane_line_probs[ll_idx]);
     ui_draw_line(s, (pvd_ll + ll_idx)->v, (pvd_ll + ll_idx)->cnt, &color, nullptr);
   }
   
